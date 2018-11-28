@@ -23,32 +23,45 @@
 			<li class="nav-item active">
 				<a class="nav-link text-danger" href="index.php">Home<span class="sr-only">(current)</span></a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link text-danger" href="#">Features</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link text-danger" href="#">Pricing</a>
-			</li>
-			<li class="nav-item dropdown">
+			<?php
+				if (isset($_SESSION['u_id']))
+				{
+					echo '<li class="nav-item">
+							<a class="nav-link text-danger" href="user_home.php">Profile</a>
+						</li>';
+				}
+			?>
+			<!-- <li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle text-danger bg-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown link</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					<a class="dropdown-item text-danger" href="#">Action</a>
 					<a class="dropdown-item text-danger" href="#">Another action</a>
 					<a class="dropdown-item text-danger" href="#">Something else here</a>
 				</div>
-			</li>
+			</li> -->
 		</ul>
 	</div>
-	<form>
-		<div class="form-row">
-			<div class="col">
-				<input type="text" class="form-control" placeholder="Username">
-			</div>
-			<div class="col">
-				<input type="password" class="form-control" placeholder="Password">
-			</div>
-			<button type="button" class="btn btn-outline-danger">Login</button>
-			<a href="signup.php" class="nav-link text-danger">Signup</a>
-		</div>
-	</form> 
+	<?php
+		if (isset($_SESSION['u_id']))
+		{
+			echo '<a name="logout" id="logout" class="btn btn-danger" href="includes/logout.inc.php" role="button">Logout</a>';
+		}
+		else
+		{
+			echo '<form action="includes/login.inc.php" method="POST">
+					<div class="form-row">
+						<div class="col">
+							<input type="text" class="form-control" placeholder="Username" name="uid">
+						</div>
+						<div class="col">
+							<input type="password" class="form-control" placeholder="Password" name="pwd">
+						</div>
+						<button type="submit" class="btn btn-outline-danger" name="submit">Login</button>
+					</div>
+				</form> 
+				<a href="signup.php" class="nav-link text-danger">Signup</a>';
+		}
+	?>
+
+	
 </nav>

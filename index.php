@@ -3,9 +3,9 @@
 ?>
 
 <div class="container">
-  <div class="page-header">
-    <h1 class="text-danger text-center">Feed</h1>      
-  </div>      
+	<div class="page-header">
+		<h1 class="text-danger text-center">Feed</h1>      
+	</div>
 </div>
 
 <?php

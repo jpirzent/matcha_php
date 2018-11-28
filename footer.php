@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" style="margin-top: 20%">
 	<div class="container text-right">
 		<span class="text-muted">copyright WTC, jpirzent [2018]</span>
     </div>

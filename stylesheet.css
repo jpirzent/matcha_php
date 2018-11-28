@@ -8,3 +8,22 @@ body
 {
 	float: right;
 }
+
+.add-info
+{
+	width: 60%;
+	margin-left: 20%;
+	margin-top: 5%;
+	padding: 1% 1% 1% 1%;
+	background-color: #454545;
+}
+
+.add-info legend
+{
+	text-align: center;
+}
+
+/* .add-info input
+{
+	border: none;
+} */

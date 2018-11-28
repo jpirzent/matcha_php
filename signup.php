@@ -9,17 +9,16 @@
   </div>      
 </div>
 
-  <form style="width: 50%; margin-top: 3%" class="mx-auto">
+  <form style="width: 50%; margin-top: 3%" class="mx-auto" action="includes/signup.inc.php" method="post">
   <div class="form-col">
     <div class="col">
-	  <input type="text" class="form-control" placeholder="First Name">
-	  <input type="text" class="form-control" placeholder="Last Name">
-	  <input type="email" class="form-control" placeholder="Email">
-	  <input type="text" class="form-control" placeholder="Username">
-	  <input type="password" class="form-control" placeholder="Password">
-	  <input type="password" class="form-control" placeholder="Password">
+	  <input type="text" class="form-control" placeholder="First Name" required name="first">
+	  <input type="text" class="form-control" placeholder="Last Name" required name="last">
+	  <input type="email" class="form-control" placeholder="Email" required name="email">
+	  <input type="text" class="form-control" placeholder="Username" required name="uid">
+	  <input type="password" class="form-control" placeholder="Password" required name="pwd">
+	  <button type="submit" name="submit" id="submit" class="btn btn-danger" style="margin-top: 1%; display: block; width: 100%" btn-lg btn-block" >Sign-Up</button>
     </div>
-	<a href="includes/signup.php" class="btn btn-success mx-auto" style="width: 200px; display: block; margin-top: 1%;">Signup</a>
   </div>
 </form>
 
