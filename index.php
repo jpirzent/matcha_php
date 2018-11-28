@@ -2,11 +2,11 @@
 	include_once 'header.php';
 ?>
 
-<section class="header-container">
-	<div class="header-bar">
-		<h2>Feed</h2>
-	</div>
-</section>
+<div class="container">
+  <div class="page-header">
+    <h1 class="text-danger text-center">Feed</h1>      
+  </div>      
+</div>
 
 <?php
 
