@@ -17,9 +17,56 @@ if (isset($_GET['error']))
 			<p>'.$_GET['error'].'</p>
 		</div>';
 }
+?>
+<div class="container">
+<div class="row">
+<?php
+
+	if (isset($_SESSION['u_id']))
+	{
+		include_once 'includes/dbh.inc.php';
+
+		$sql = 'SELECT * FROM users';
+		$pdo = $conn->prepare($sql);
+		$pdo->execute();
+
+		$result = $pdo->fetchAll();
+		foreach ($result as $value)
+		{
+			$uid = $value['user_uid'];
+			$id = $value['user_id'];
+
+			try
+			{
+				$sql = "SELECT * FROM preferences WHERE pref_uid=:id Limit 1";
+				$pdo = $conn->prepare($sql);
+				$pdo->bindParam(':id', $id);
+				$pdo->execute();
+				$check = $pdo->fetch(PDO::FETCH_ASSOC);
+			}
+			catch (PDOException $var)
+			{
+				echo $var->getMessage();
+			}
+
+			$profile = $check['pref_profile'];
+			$bio = $check['pref_bio'];
+			echo '<div class="col-sm mt-3">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="data:image/png;base64,'.($profile).'" alt="Profile Picture" style="height: 200px">
+						<div class="card-body">
+							<h5 class="card-title">'.$uid.'</h5>
+							<p class="card-text">'.$bio.'</p>
+							<a href="view_profile.php?id='.$value['user_id'].'" class="btn btn-primary">View Profile</a>
+						</div>
+					</div>
+				</div>';
+		}
+	}
 
 ?>
-
+</div>
+</div>
 <?php
 
 	include_once 'footer.php';

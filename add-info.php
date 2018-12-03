@@ -43,26 +43,33 @@
 </form> -->
 
 
-<form action="includes/add-info.inc.php" method="post" class="add-info rounded">
+<form action="includes/add-info.inc.php" method="post" class="add-info rounded" id="add" enctype="multipart/form-data">
 	<legend class="text-danger" style="text-decoration: underline">Add-Info</legend>
 
 	<label for="genders" class="text-danger">Gender:</label>
-	<input list="gender" id="genders" class="form-control">
-	<datalist id="gender">
-		<option value="Female">Female</option>
-		<option value="Male"></option>
-	</datalist>
+	<div class="radio" id="genders">
+      <label class="text-danger" style="margin-left: 1%;"><input type="radio" name="genders" value="Female" checked>Female</label>
+	  <label class="text-danger" style="margin-left: 1%"><input type="radio" name="genders" value="Male">Male</label>
+    </div>
 	<br>
 	<label for="sex" class="text-danger">Sexuality:</label>
-	<input list="sexuality" id="sex" class="form-control">
-	<datalist id="sexuality">
-		<option value="Heterosexual"></option>
-		<option value="Homosexual"></option>
-		<option value="Bisexual"></option>
-	</datalist>
+	<div class="radio" id="sex">
+    	<label class="text-danger" style="margin-left: 1%;"><input type="radio" name="sexuality" value="Heterosexual" checked>Heterosexual</label>
+		<label class="text-danger" style="margin-left: 1%"><input type="radio" name="sexuality" value="Homosexual">Homosexual</label>
+		<label class="text-danger" style="margin-left: 1%"><input type="radio" name="sexuality" value="Bisexual">Bisexual</label>
+    </div>
 	<br>
 	<label for="bio" class="text-danger">Bio:</label>
 	<textarea name="bio" id="bio" class="form-control"></textarea>
+	<br>
+	<p class="text-danger">Profile Picture:</p><input type="file" name="profile" id="prof-pic">
+	<br>
+	<br>
+	<p class="text-danger">Other Pictures:</p>
+	<input type="file" name="ot-pic1" id="ot-pic1" style="width: 25%">
+	<input type="file" name="ot-pic2" id="ot-pic2" style="width: 25%">
+	<input type="file" name="ot-pic3" id="ot-pic3" style="width: 25%">
+	<input type="file" name="ot-pic4" id="ot-pic4" style="width: 20%">
 	<button type="submit" name="submit" id="submit" class="btn btn-danger form-control" style="margin-top: 1%" btn-lg btn-block>Add Info</button>
 </form>
 

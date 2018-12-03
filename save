@@ -1,0 +1,19 @@
+<div class="rounded" style="background-color: darkgrey; height: 110px; margin-bottom: 3%; overflow: auto;">
+	<?php
+
+		include_once 'includes/dbh.inc.php';
+
+		$sql = 'SELECT * FROM tags';
+		$pdo = $conn->prepare($sql);
+		$pdo->execute();
+
+		$result = $pdo->fetchAll();
+		foreach ($result as $value)
+		{
+			echo '<div class="checkbox">
+					<label class="text-danger"><input type="checkbox" name="'.$value['tag_name'].'">'.$value['tag_name'].'</label>
+				</div>';
+		}
+
+	?>
+	</div>
