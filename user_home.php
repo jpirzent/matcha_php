@@ -20,6 +20,11 @@ try
 
 	$result = $pdo->fetch(PDO::FETCH_ASSOC);
 
+	$sql = 'SELECT * FROM tags';
+	$pdo = $conn->prepare($sql);
+	$pdo->execute();
+
+	$tags = $pdo->fetchAll();
 	if ($result)
 	{
 		$uid = $result['user_uid'];
@@ -37,6 +42,7 @@ try
 			$sex = $res['pref_sex'];
 			$gender = $res['pref_gender'];
 			$profile = $res['pref_profile'];
+			$my_tags = explode(',', $res['pref_tags']);
 
 			echo '<div class="jumbotron text-danger bg-dark" style="margin-top: 2%">
 					<h1 class="display-4">'.$uid.'</h1>
@@ -49,11 +55,28 @@ try
 							</div>
 						</div>
 					</div>
-					<p>'.$name.'</p>
-					<p>'.$gender.'</p>
-					<p>'.$sex.'</p>
-					<p>/common tags/</p>
-					<a class="btn btn-danger btn-lg" href="#" role="button">match?</a>
+					<h3 style="text-align: center; margin-top: 2%">/Name/ '.$name.'</h3>
+					<h3 style="text-align: center; margin-top: 2%">/Gender/ '.$gender.'</h3>
+					<h3 style="text-align: center; margin-top: 2%">/Sexuality/ '.$sex.'</h3>
+					<div style="width: 25%; margin-top: 2%" class="container" scroll="auto">
+						<h2 style="text-align: center;" class="text-danger">My-Tags</h2>';
+						foreach ($my_tags as $val)
+						{
+							echo '<a href="includes/remove-tag.inc.php?name='.$val.'" class="btn btn-danger" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$val.'</a>';
+						}
+					echo '</div>
+					<div style="width: 25%;" class="container" scroll="auto">
+						<h2 style="text-align: center; margin-top: 2%" class="text-danger">Add-Tags?</h2>';
+						include_once 'includes/functions1.inc.php';
+						foreach ($tags as $tag)
+						{
+							$check = tagExists($tag['tag_name'], $my_tags);
+							if ($check == FALSE)
+							{
+								echo '<a href="includes/add-tag.inc.php?id='.$tag['tag_id'].'" class="btn btn-danger" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$tag['tag_name'].'</a>';
+							}
+						}	
+					echo '</div>
 				  </div>';
 		}
 	}

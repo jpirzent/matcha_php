@@ -28,13 +28,24 @@
 			$pdo->execute();
 			
 			$res = $pdo->fetch(PDO::FETCH_ASSOC);
+
+
+			$user = $_SESSION['u_id'];
+			$sql = "SELECT * FROM preferences WHERE pref_uid=:id LIMIT 1";
+			$pdo = $conn->prepare($sql);
+			$pdo->bindParam(':id', $user);
+			$pdo->execute();
+
+			$u_pref = $pdo->fetch(PDO::FETCH_ASSOC);
+			$u_tags = explode(',', $u_pref['pref_tags']);
 			if ($res)
 			{
 				$bio = $res['pref_bio'];
 				$sex = $res['pref_sex'];
 				$gender = $res['pref_gender'];
 				$profile = $res['pref_profile'];
-
+				$my_tags = explode(',', $res['pref_tags']);
+				
 				echo '<div class="jumbotron text-danger bg-dark" style="margin-top: 2%">
 						<h1 class="display-4">'.$uid.'</h1>
 						<p class="lead">'.$bio.'</p>
@@ -73,8 +84,18 @@
 						<p>'.$name.'</p>
 						<p>'.$gender.'</p>
 						<p>'.$sex.'</p>
-						<p>/common tags/</p>
-						<a class="btn btn-danger btn-lg" href="#" role="button">match?</a>
+						<div style="width: 25%; margin-top: 2%" class="container" scroll="auto">
+						<h2 style="text-align: center;" class="text-danger">Common-Tags</h2>';
+					include_once 'includes/functions1.inc.php';
+					foreach ($my_tags as $val)
+					{
+						$check = tagExists($val, $u_tags);
+						if ($check == TRUE)
+						{
+							echo '<a href="" class="btn btn-danger" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$val.'</a>';
+						}
+					}
+				echo '</div><a class="btn btn-danger btn-lg" href="#" role="button">match?</a>
 					  </div>';
 			}
 		}
