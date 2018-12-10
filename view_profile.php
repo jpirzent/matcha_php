@@ -14,13 +14,14 @@
 		$pdo = $conn->prepare($sql);
 		$pdo->bindParam(':id', $id);
 		$pdo->execute();
-
+		
 		$result = $pdo->fetch(PDO::FETCH_ASSOC);
-
+		
 		if ($result)
 		{
 			$uid = $result['user_uid'];
 			$name = $result['user_first'].' '.$result['user_last'];
+			$age = $result['user_age'];
 
 			$sql = "SELECT * FROM preferences WHERE pref_uid=:id LIMIT 1";
 			$pdo = $conn->prepare($sql);
@@ -87,6 +88,10 @@
 						<div style="width: 25%; margin-top: 2%" class="container" scroll="auto">
 						<h2 style="text-align: center;" class="text-danger">Common-Tags</h2>';
 					include_once 'includes/functions1.inc.php';
+					$num = tagSimilar($my_tags, $u_tags);
+					$gap = ageGap($age, $_SESSION['u_age']);
+					echo $num;
+					echo '<br>'.$gap;
 					foreach ($my_tags as $val)
 					{
 						$check = tagExists($val, $u_tags);

@@ -22,16 +22,18 @@ if (isset($_GET['error']))
 <div class="row">
 <?php
 
+	include_once 'includes/functions1.inc.php';
 	if (isset($_SESSION['u_id']))
 	{
 		include_once 'includes/dbh.inc.php';
-
+		
 		$sql = 'SELECT * FROM users';
 		$pdo = $conn->prepare($sql);
 		$pdo->execute();
-
+		
 		$result = $pdo->fetchAll();
-		foreach ($result as $value)
+		$users = sortMatches($result, $conn);
+		foreach ($users as $value)
 		{
 			$uid = $value['user_uid'];
 			$id = $value['user_id'];

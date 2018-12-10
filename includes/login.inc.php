@@ -65,6 +65,7 @@ if (isset($_POST['submit']))
 					$_SESSION['u_uid'] = $row['user_uid'];
 					$_SESSION['u_verify'] = $row['user_verified'];
 					$_SESSION['u_notif'] = $row['user_notif'];
+					$_SESSION['u_age'] = $row['user_age'];
 					if ($row['user_add'] == 0)
 					{
 						header("Location: ../add-info.php?login=success");
