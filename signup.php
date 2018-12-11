@@ -15,6 +15,7 @@
 	  <input type="text" class="form-control" placeholder="First Name" required name="first">
 	  <input type="text" class="form-control" placeholder="Last Name" required name="last">
 	  <input type="email" class="form-control" placeholder="Email" required name="email">
+	  <input type="number" name="age" class="form-control" id="age" min="18" placeholder="Age">
 	  <input type="text" class="form-control" placeholder="Username" required name="uid">
 	  <input type="password" class="form-control" placeholder="Password" required name="pwd">
 	  <button type="submit" name="submit" id="submit" class="btn btn-danger" style="margin-top: 1%; display: block; width: 100%" btn-lg btn-block" >Sign-Up</button>

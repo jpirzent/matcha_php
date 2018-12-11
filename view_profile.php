@@ -8,6 +8,23 @@
 
 	include_once 'includes/dbh.inc.php';
 	$id = $_GET['id'];
+
+	
+	try
+	{
+		$sql = "INSERT INTO preferences (:usee, :user) VALUES (:";
+		$pdo = $conn->prepare($sql);
+		$pdo->bindParam(":views", $view_count['pref_views']);
+		$pdo->bindParam(":id", $id);
+		$pdo->execute();
+	}
+	catch (PDOException $var)
+	{
+		echo $var->getMessage();
+	}
+
+
+
 	try
 	{
 		$sql = "SELECT * FROM users WHERE user_id=:id LIMIT 1";
@@ -49,6 +66,7 @@
 				
 				echo '<div class="jumbotron text-danger bg-dark" style="margin-top: 2%">
 						<h1 class="display-4">'.$uid.'</h1>
+						<a class="btn btn-danger" style="float: right" href="report_user.php?id='.$id.'">Report User?</a>
 						<p class="lead">'.$bio.'</p>
 						<hr class="my-4 bg-danger">
 						<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -82,9 +100,9 @@
 				}
 				echo '</div>
 						</div>
-						<p>'.$name.'</p>
-						<p>'.$gender.'</p>
-						<p>'.$sex.'</p>
+						<h3 style="text-align: center; margin-top: 2%">/Name/ '.$name.'</h3>
+						<h3 style="text-align: center; margin-top: 2%">/Gender/ '.$gender.'</h3>
+						<h3 style="text-align: center; margin-top: 2%">/Sexuality/ '.$sex.'</h3>
 						<div style="width: 25%; margin-top: 2%" class="container" scroll="auto">
 						<h2 style="text-align: center;" class="text-danger">Common-Tags</h2>';
 					include_once 'includes/functions1.inc.php';
@@ -96,7 +114,7 @@
 							echo '<a href="" class="btn btn-danger" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$val.'</a>';
 						}
 					}
-				echo '</div><a class="btn btn-danger btn-lg" href="#" role="button">match?</a>
+				echo '</div><div class="text-center"><a class="btn btn-danger btn-lg center-block" href="#" role="button">Match?</a></div>
 					  </div>';
 			}
 		}
