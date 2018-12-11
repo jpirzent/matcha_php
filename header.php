@@ -59,7 +59,8 @@
 						<button type="submit" class="btn btn-outline-danger" name="submit">Login</button>
 					</div>
 				</form> 
-				<a href="signup.php" class="nav-link text-danger">Signup</a>';
+				<a href="signup.php" class="nav-link text-danger">Signup</a>
+				<a href="forgot_pwd.php" class="nav-link text-danger">Forgot Password?</a>';
 		}
 	?>
 

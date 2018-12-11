@@ -46,6 +46,7 @@ try
 
 			echo '<div class="jumbotron text-danger bg-dark" style="margin-top: 2%">
 					<h1 class="display-4">'.$uid.'</h1>
+					<a class="btn btn-danger" style="float: right" href="change_details.php">Change Details?</a>
 					<p class="lead">'.$bio.'</p>
 					<hr class="my-4 bg-danger">
 					<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -92,7 +93,7 @@ catch (PDOException $var)
 }
 ?>
 
-
+<a class="btn btn-danger" href="change_details.php">Change Details?</a>
 
 <?php
 		include_once 'footer.php';

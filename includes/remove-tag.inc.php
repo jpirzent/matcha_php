@@ -51,7 +51,7 @@
 			$pdo->bindParam('id', $id);
 			$pdo->execute();
 			
-			header("Location: ../user_home.php?changeSuccesfull?".$x);
+			header("Location: ../user_home.php?changeSuccesfull");
 			exit();
 		}
 		catch (PDOException $var)

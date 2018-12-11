@@ -88,10 +88,6 @@
 						<div style="width: 25%; margin-top: 2%" class="container" scroll="auto">
 						<h2 style="text-align: center;" class="text-danger">Common-Tags</h2>';
 					include_once 'includes/functions1.inc.php';
-					$num = tagSimilar($my_tags, $u_tags);
-					$gap = ageGap($age, $_SESSION['u_age']);
-					echo $num;
-					echo '<br>'.$gap;
 					foreach ($my_tags as $val)
 					{
 						$check = tagExists($val, $u_tags);
