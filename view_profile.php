@@ -12,10 +12,10 @@
 	
 	try
 	{
-		$sql = "INSERT INTO preferences (:usee, :user) VALUES (:";
+		$sql = "INSERT INTO views (views_usee, views_user) VALUES (:usee, :user)";
 		$pdo = $conn->prepare($sql);
-		$pdo->bindParam(":views", $view_count['pref_views']);
-		$pdo->bindParam(":id", $id);
+		$pdo->bindParam(":usee", $_SESSION['u_id']);
+		$pdo->bindParam(":user", $id);
 		$pdo->execute();
 	}
 	catch (PDOException $var)
@@ -62,11 +62,14 @@
 				$sex = $res['pref_sex'];
 				$gender = $res['pref_gender'];
 				$profile = $res['pref_profile'];
+				$f_rate = $res['pref_fameRate'];
 				$my_tags = explode(',', $res['pref_tags']);
 				
 				echo '<div class="jumbotron text-danger bg-dark" style="margin-top: 2%">
+						<div class="btn btn-warning" style="float: right">Fame Rating: '.$f_rate.'!!</div>
 						<h1 class="display-4">'.$uid.'</h1>
-						<a class="btn btn-danger" style="float: right" href="report_user.php?id='.$id.'">Report User?</a>
+						<a class="btn btn-outline-danger" style="float: right" href="report_user.php?id='.$id.'">Report User?</a>
+						<a class="btn btn-outline-danger" style="float: right; margin-right: 1%" href="block_user.php?id='.$id.'">Block User?</a>
 						<p class="lead">'.$bio.'</p>
 						<hr class="my-4 bg-danger">
 						<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -111,16 +114,16 @@
 						$check = tagExists($val, $u_tags);
 						if ($check == TRUE)
 						{
-							echo '<a href="" class="btn btn-danger" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$val.'</a>';
+							echo ' <a href="" class="btn btn-danger btn-xlg" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$val.'</a>';
 						}
 					}
-				echo '</div><div class="text-center"><a class="btn btn-danger btn-lg center-block" href="#" role="button">Match?</a></div>
+				echo '</div><div class="text-center" style="margin-top: 1%;"><a class="btn btn-outline-danger btn-lg" href="includes/match.inc.php?id='.$id.'" role="button">Like?</a></div>
 					  </div>';
 			}
 		}
 		else
 		{
-			header("Location: ../index.php?error=error");
+			header("Location: index.php?error=error");
 			exit();
 		}
 	}

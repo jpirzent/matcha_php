@@ -46,7 +46,10 @@ try
 
 			echo '<div class="jumbotron text-danger bg-dark" style="margin-top: 2%">
 					<h1 class="display-4">'.$uid.'</h1>
-					<a class="btn btn-danger" style="float: right" href="change_details.php">Change Details?</a>
+					<a class="btn btn-danger" style="float: right;margin-right: 1%;" href="matches.php">Matches</a>
+					<a class="btn btn-danger" style="float: right;margin-right: 1%;" href="likes.php">Likes</a>
+					<a class="btn btn-danger" style="float: right; margin-right: 1%;" href="views.php">Views</a>
+					<a class="btn btn-danger" style="float: right;margin-right: 1%;" href="change_details.php">Change Details?</a>
 					<p class="lead">'.$bio.'</p>
 					<hr class="my-4 bg-danger">
 					<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -63,7 +66,7 @@ try
 						<h2 style="text-align: center;" class="text-danger">My-Tags</h2>';
 						foreach ($my_tags as $val)
 						{
-							echo '<a href="includes/remove-tag.inc.php?name='.$val.'" class="btn btn-danger" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$val.'</a>';
+							echo ' <a href="includes/remove-tag.inc.php?name='.$val.'" class="btn btn-danger" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$val.'</a>';
 						}
 					echo '</div>
 					<div style="width: 25%;" class="container" scroll="auto">
@@ -74,7 +77,7 @@ try
 							$check = tagExists($tag['tag_name'], $my_tags);
 							if ($check == FALSE)
 							{
-								echo '<a href="includes/add-tag.inc.php?id='.$tag['tag_id'].'" class="btn btn-danger" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$tag['tag_name'].'</a>';
+								echo ' <a href="includes/add-tag.inc.php?id='.$tag['tag_id'].'" class="btn btn-danger" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$tag['tag_name'].'</a>';
 							}
 						}	
 					echo '</div>
@@ -92,8 +95,6 @@ catch (PDOException $var)
 	echo $var->getMessage();
 }
 ?>
-
-<a class="btn btn-danger" href="change_details.php">Change Details?</a>
 
 <?php
 		include_once 'footer.php';

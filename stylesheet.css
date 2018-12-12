@@ -23,7 +23,9 @@ body
 	text-align: center;
 }
 
-/* .add-info input
+.fame-rate
 {
-	border: none;
-} */
+	width: 10%;
+	border-radius: 50%;
+	color: orange !important;
+}
