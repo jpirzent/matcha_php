@@ -47,8 +47,8 @@
 			{
 				$sql = "SELECT * from likes WHERE (likes_profile = :user AND likes_user = :prof)";
 				$pdo = $conn->prepare($sql);
-				$pdo->bindParam(':user', $profile_id);
-				$pdo->bindParam(':prof', $my_id);
+				$pdo->bindParam(':user', $my_id);
+				$pdo->bindParam(':prof', $profile_id);
 				$pdo->execute();
 
 				$result = $pdo->fetchAll();

@@ -14,6 +14,7 @@
 			<a href="change.php?change=gender" class="btn btn-danger" style="display: block; margin: 1% 1% 1% 1%;">Change Gender</a>
 			<a href="change.php?change=sex" class="btn btn-danger" style="display: block; margin: 1% 1% 1% 1%;">Change Sexuality</a>
 			<a href="change.php?change=bio" class="btn btn-danger" style="display: block; margin: 1% 1% 1% 1%;">Change Bio</a>
+			<a href="change.php?change=pic" class="btn btn-danger" style="display: block; margin: 1% 1% 1% 1%;">Change Pictures</a>
 		
 		</div>
 

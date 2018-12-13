@@ -6,7 +6,7 @@
 	{
 		$gender = $_POST['genders'];
 		$sex = $_POST['sexuality'];
-		$bio = $_POST['bio'];
+		$bio = htmlentities($_POST['bio']);
 
 		$profile = base64_encode(file_get_contents($_FILES['profile']['tmp_name']));
 		if (isset($_FILES['ot-pic1']))
@@ -67,6 +67,7 @@
 					echo $var->getMessage();
 				}
 
+				$_SESSION['u_add'] = '1';
 				try
 				{
 					$sql = 'INSERT INTO preferences (pref_gender, pref_sex, pref_bio, pref_uid, pref_profile, `pref_ot-pic1`, `pref_ot-pic2`, `pref_ot-pic3`, `pref_ot-pic4`) VALUES (:gender, :sex, :bio, :id, :profiles, :other1, :other2, :other3, :other4);';

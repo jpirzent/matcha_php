@@ -1,13 +1,14 @@
 <?php
-	session_start();
+
+	include_once 'header.php';
+
 	if (isset($_SESSION['u_id']))
 	{
-		include_once 'header.php';
 ?>
 
 <div class="container">
 	<div class="page-header">
-		<h1 class="text-danger text-center">People Who Have Viewed Your Profile</h1>      
+		<h1 class="text-danger text-center">People Who You have Matched With</h1>      
 	</div>
 </div>
 
@@ -20,43 +21,47 @@
 
 	try
 	{
-		$sql = "SELECT * FROM views WHERE views_user=:id";
+		$sql = "SELECT * FROM matches WHERE (match_p1=:id1 OR match_p2=:id2)";
 		$pdo = $conn->prepare($sql);
-		$pdo->bindParam(':id', $_SESSION['u_id']);
+		$pdo->bindParam(':id1', $_SESSION['u_id']);
+		$pdo->bindParam(':id2', $_SESSION['u_id']);
 		$pdo->execute();
-		$views = $pdo->fetchAll();
+		$matches = $pdo->fetchAll();
 	}
 	catch (PDOException $var)
 	{
 		echo $var->getMessage();
 	}
-	if (empty($views))
+	if (empty($matches))
 	{
-		echo '<h1 class="text-danger text-center" style="margin-top: 10%;">No Views <strong>YET!</strong></h1>';
+		echo '<h1 class="text-danger text-center" style="margin-top: 10%;">No Matches <strong>YET!</strong></h1>';
 	}
 	else
 	{
 		echo '<div class="container mx-auto bg-dark" style="width: 70%; display: block; margin-top: 2.5%; padding: 1% 1% 1% 1%;">';
-		foreach ($views as $val)
+		foreach ($matches as $val)
 		{
 			$sql = "SELECT `user_uid` FROM users WHERE user_id=:id LIMIT 1";
 			$pdo = $conn->prepare($sql);
-			$pdo->bindParam(':id', $val['views_usee']);
+			$pdo->bindParam(':id', $val['match_p1']);
 			$pdo->execute();
 			$viewer = $pdo->fetch(PDO::FETCH_ASSOC);
 
-			echo '<a href="view_profile.php?id='.$val['views_usee'].'" class="btn btn-danger" style="display: block; margin: 1% 1% 1% 1%;">'.$viewer['user_uid'].'</a>';
+			echo '<a href="view_profile.php?id='.$val['match_p1'].'" class="btn btn-danger" style="display: block; margin: 1% 1% 1% 1%;">'.$viewer['user_uid'].'</a>';
 		}
 		echo '</div>';
 	}
 ?>
 
 <?php
-		include_once 'footer.php';
+
 	}
 	else
 	{
 		header("Location: index.php?error=PleaseLogin");
-		exit();	
+		exit();
 	}
+
+	include_once 'footer.php';
+
 ?>

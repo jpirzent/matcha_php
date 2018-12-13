@@ -2,6 +2,53 @@
 	include_once 'header.php';
 ?>
 
+
+<?php
+	$DB_DSN = "localhost";
+	$DB_USER  = "root";
+	$DB_PASSWORD = "012345";
+	$DB_NAME = "matcha";
+	try
+	{	
+		$conn = new PDO("mysql:host=$DB_DSN;dbname=$DB_NAME", $DB_USER, $DB_PASSWORD);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	}
+	catch (PDOException $var)
+	{
+		try
+		{
+			$sql = "CREATE DATABASE IF NOT EXISTS matcha";
+			$conn = new PDO("mysql:host=$DB_DSN", $DB_USER, $DB_PASSWORD);
+			$create = $conn->prepare($sql);
+			$create->execute();
+			
+			include_once 'config/setup.con.php';
+			$conn->query("use `$DB_NAME`");
+			cr_users($conn);
+			cr_likes($conn);
+			cr_block($conn);
+			cr_matches($conn);
+			cr_pref($conn);
+			cr_reports($conn);
+			cr_tags($conn);
+			cr_views($conn);
+			echo "<script type='text/javascript'>alert('Database Created Successfully');</script>";
+		}
+		catch(PDOException $e)
+		{
+			echo "<script type='text/javascript'>alert(". $e->getMessage().");</script>";
+		}
+	}
+?>
+
+
+
+
+
+
+
+
+
 <div class="container">
 	<div class="page-header">
 		<h1 class="text-danger text-center">Feed</h1>      
@@ -13,7 +60,7 @@
 <?php
 
 	include_once 'includes/functions1.inc.php';
-	if (isset($_SESSION['u_id']))
+	if (isset($_SESSION['u_id']) && $_SESSION['u_add'] == 1)
 	{
 		include_once 'includes/dbh.inc.php';
 		
@@ -86,6 +133,10 @@
 				}
 			}
 		}
+	}
+	else
+	{
+		echo '<h1 class="text-danger text-center" style="margin-top: 10%;">Please Login</h1>';
 	}
 
 ?>

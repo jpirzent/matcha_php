@@ -325,7 +325,7 @@
 		{
 			$id = $_SESSION['u_id'];
 			$pwd = $_POST['pwd'];
-			$bio = $_POST['bio'];
+			$bio = htmlentities($_POST['bio']);
 
 			if (empty($pwd) || empty($bio))
 			{
@@ -372,6 +372,52 @@
 						}
 					}
 				}
+			}
+		}
+		else if ($_POST['submit'] == "pic")
+		{
+			$id = $_SESSION['u_id'];
+			if (isset($_FILES['profile']))
+			{
+				$profile = base64_encode(file_get_contents($_FILES['profile']['tmp_name']));
+			}
+			if (isset($_FILES['ot-pic1']))
+			{
+				$other1 = base64_encode(file_get_contents($_FILES['ot-pic1']['tmp_name']));
+			}
+			if (isset($_FILES['ot-pic1']))
+			{
+				$other2 = base64_encode(file_get_contents($_FILES['ot-pic2']['tmp_name']));
+			}
+			if (isset($_FILES['ot-pic1']))
+			{
+				$other3 = base64_encode(file_get_contents($_FILES['ot-pic3']['tmp_name']));
+			}
+			if (isset($_FILES['ot-pic1']))
+			{
+				$other4 = base64_encode(file_get_contents($_FILES['ot-pic4']['tmp_name']));
+			}
+			try
+			{
+				$sql = "UPDATE preferences 
+						SET pref_profile = :profiles, `pref_ot-pic1` = :other1, `pref_ot-pic2` = :other2, `pref_ot-pic3` = :other3, `pref_ot-pic4` = :other4 
+						WHERE pref_uid=:id LIMIT 1";
+				$pdo = $conn->prepare($sql);
+				$pdo->bindParam(':profiles', $profile);
+				echo 'what?<br>';
+				$pdo->bindParam(':other1', $other1);
+				$pdo->bindParam(':other2', $other2);
+				$pdo->bindParam(':other3', $other3);
+				$pdo->bindParam(':other4', $other4);
+				$pdo->bindParam(':id', $id);
+				$pdo->execute();
+
+				header("Location: ../index.php?change=successfull");
+				exit();
+			}
+			catch (PDOException $var)
+			{
+				echo $var->getMessage();
 			}
 		}
 	}

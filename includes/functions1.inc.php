@@ -293,3 +293,69 @@
 			echo $var->getMessage();
 		}
 	}
+
+
+
+	function checkLiked($conn, $id)
+	{
+		$my_id = $_SESSION['u_id'];
+
+		try
+		{
+			$sql = "SELECT * FROM likes WHERE (likes_user=:my_id AND likes_profile=:id)";
+			$pdo = $conn->prepare($sql);
+			$pdo->bindParam(':my_id', $my_id);
+			$pdo->bindParam(':id', $id);
+			$pdo->execute();
+
+			$result = $pdo->fetchAll();
+		}
+		catch (PDOException $var)
+		{
+			echo $var->getMessage();
+		}
+		if (empty($result))
+		{
+			return (FALSE);
+		}
+		else
+		{
+			return (TRUE);
+		}
+	}
+
+
+	function setOnline($conn)
+	{
+		try
+		{
+			$sql = "UPDATE users SET user_status = 'Online', user_sDate = 'Online' WHERE user_id = :id";
+			$pdo = $conn->prepare($sql);
+			$pdo->bindParam(':id', $_SESSION['u_id']);
+			$pdo->execute();
+		}
+		catch (PDOException $var)
+		{
+			echo $var->getMessage();
+		}
+	}
+
+
+	function setOffline($conn)
+	{
+		date_default_timezone_set('Africa/Johannesburg');
+		$date = date("Y-m-d h-i-sa");
+
+		try
+		{
+			$sql = "UPDATE users SET user_status = 'Offline', user_sDate = :dates WHERE user_id = :id";
+			$pdo = $conn->prepare($sql);
+			$pdo->bindParam(':dates', $date);
+			$pdo->bindParam(':id', $_SESSION['u_id']);
+			$pdo->execute();
+		}
+		catch (PDOException $var)
+		{
+			echo $var->getMessage();
+		}
+	}

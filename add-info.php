@@ -60,9 +60,9 @@
     </div>
 	<br>
 	<label for="bio" class="text-danger">Bio:</label>
-	<textarea name="bio" id="bio" class="form-control"></textarea>
+	<textarea name="bio" id="bio" class="form-control" required></textarea>
 	<br>
-	<p class="text-danger">Profile Picture:</p><input type="file" name="profile" id="prof-pic">
+	<p class="text-danger">Profile Picture:</p><input type="file" name="profile" id="prof-pic" required>
 	<br>
 	<br>
 	<p class="text-danger">Other Pictures:</p>

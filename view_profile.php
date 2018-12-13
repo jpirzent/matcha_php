@@ -39,6 +39,8 @@
 			$uid = $result['user_uid'];
 			$name = $result['user_first'].' '.$result['user_last'];
 			$age = $result['user_age'];
+			$status = $result['user_status'];
+			$date = $result['user_sDate'];
 
 			$sql = "SELECT * FROM preferences WHERE pref_uid=:id LIMIT 1";
 			$pdo = $conn->prepare($sql);
@@ -65,8 +67,18 @@
 				$f_rate = $res['pref_fameRate'];
 				$my_tags = explode(',', $res['pref_tags']);
 				
-				echo '<div class="jumbotron text-danger bg-dark" style="margin-top: 2%">
-						<div class="btn btn-warning" style="float: right">Fame Rating: '.$f_rate.'!!</div>
+				echo '<div class="jumbotron text-danger bg-dark" style="margin-top: 2%">';
+
+				if ($status == "Online")
+				{
+					echo '<h6 style="text-align: center; margin-bottom: 2%">/Status/ '.$status.'</h6>';
+				}
+				else
+				{
+					echo '<h6 style="text-align: center; margin-bottom: 2%">/Status/ '.$status.'; Last Online: '.$date.'</h6>';
+				}
+
+				echo'<div class="btn btn-warning" style="float: right">Fame Rating: '.$f_rate.'!!</div>
 						<h1 class="display-4">'.$uid.'</h1>
 						<a class="btn btn-outline-danger" style="float: right" href="report_user.php?id='.$id.'">Report User?</a>
 						<a class="btn btn-outline-danger" style="float: right; margin-right: 1%" href="block_user.php?id='.$id.'">Block User?</a>
@@ -106,6 +118,7 @@
 						<h3 style="text-align: center; margin-top: 2%">/Name/ '.$name.'</h3>
 						<h3 style="text-align: center; margin-top: 2%">/Gender/ '.$gender.'</h3>
 						<h3 style="text-align: center; margin-top: 2%">/Sexuality/ '.$sex.'</h3>
+						<h3 style="text-align: center; margin-top: 2%">/Age/ '.$age.'</h3>
 						<div style="width: 25%; margin-top: 2%" class="container" scroll="auto">
 						<h2 style="text-align: center;" class="text-danger">Common-Tags</h2>';
 					include_once 'includes/functions1.inc.php';
@@ -117,8 +130,18 @@
 							echo ' <a href="" class="btn btn-danger btn-xlg" style="margin: 0.1% 0.1% 0.1% 0.1%" role="button">#'.$val.'</a>';
 						}
 					}
-				echo '</div><div class="text-center" style="margin-top: 1%;"><a class="btn btn-outline-danger btn-lg" href="includes/match.inc.php?id='.$id.'" role="button">Like?</a></div>
+
+				$liked = checkLiked($conn, $id);
+				if ($liked == FALSE)
+				{
+					echo '</div><div class="text-center" style="margin-top: 1%;"><a class="btn btn-outline-danger btn-lg" href="includes/match.inc.php?id='.$id.'" role="button">Like?</a></div>
 					  </div>';
+				}
+				else
+				{
+					echo '</div><div class="text-center" style="margin-top: 1%;"><a class="btn btn-outline-danger btn-lg" href="includes/unlike.inc.php?id='.$id.'" role="button">Unlike?</a></div>
+					  </div>';
+				}
 			}
 		}
 		else

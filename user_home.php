@@ -29,6 +29,7 @@ try
 	{
 		$uid = $result['user_uid'];
 		$name = $result['user_first'].' '.$result['user_last'];
+		$age = $result['user_age'];
 
 		$sql = "SELECT * FROM preferences WHERE pref_uid=:id LIMIT 1";
 		$pdo = $conn->prepare($sql);
@@ -41,10 +42,12 @@ try
 			$bio = $res['pref_bio'];
 			$sex = $res['pref_sex'];
 			$gender = $res['pref_gender'];
+			$f_rate = $res['pref_fameRate'];
 			$profile = $res['pref_profile'];
 			$my_tags = explode(',', $res['pref_tags']);
 
 			echo '<div class="jumbotron text-danger bg-dark" style="margin-top: 2%">
+					<div class="btn btn-warning" style="float: right">Fame Rating: '.$f_rate.'!!</div>
 					<h1 class="display-4">'.$uid.'</h1>
 					<a class="btn btn-danger" style="float: right;margin-right: 1%;" href="matches.php">Matches</a>
 					<a class="btn btn-danger" style="float: right;margin-right: 1%;" href="likes.php">Likes</a>
@@ -62,6 +65,7 @@ try
 					<h3 style="text-align: center; margin-top: 2%">/Name/ '.$name.'</h3>
 					<h3 style="text-align: center; margin-top: 2%">/Gender/ '.$gender.'</h3>
 					<h3 style="text-align: center; margin-top: 2%">/Sexuality/ '.$sex.'</h3>
+					<h3 style="text-align: center; margin-top: 2%">/Age/ '.$age.'</h3>
 					<div style="width: 25%; margin-top: 2%" class="container" scroll="auto">
 						<h2 style="text-align: center;" class="text-danger">My-Tags</h2>';
 						foreach ($my_tags as $val)

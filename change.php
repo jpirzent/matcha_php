@@ -66,9 +66,24 @@
 			<button type="submit" name="submit" id="submit" value="bio" class="btn btn-danger" style="margin-top: 1%; display: block; width: 100%" >Change!!</button>
 		</form>';
 		}
-		
+		else if ($_GET['change'] == "pic")
+		{
+			echo '<form action="includes/change_details.inc.php" method="post" class="add-info rounded" id="add" enctype="multipart/form-data">
+					<h1 class="text-danger" style="text-align: center">Change Pictures</h1>
+					<p class="text-danger">Profile Picture:</p><input type="file" name="profile" id="prof-pic" required>
+					<br>
+					<br>
+					<p class="text-danger">Other Pictures:</p>
+					<input type="file" name="ot-pic1" id="ot-pic1" style="width: 25%">
+					<input type="file" name="ot-pic2" id="ot-pic2" style="width: 25%">
+					<input type="file" name="ot-pic3" id="ot-pic3" style="width: 25%">
+					<input type="file" name="ot-pic4" id="ot-pic4" style="width: 20%">
+					<br>
+					<br>
+					<button type="submit" name="submit" id="submit" value="pic" class="btn btn-danger form-control" style="margin-top: 1%" btn-lg btn-block>Change Pictures</button>
+				</form>';
+		}
 ?>
-
 
 <?php
 	}

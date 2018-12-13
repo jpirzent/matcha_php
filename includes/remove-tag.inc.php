@@ -27,8 +27,6 @@
 		$x = 0;
 		foreach ($tags as $val)
 		{
-			echo $val;
-			echo '<br>'.$tag.'<br>';
 			if ($val == $tag)
 			{
 				break;

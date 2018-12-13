@@ -3,9 +3,10 @@
 try {
     $tagsFile = file('tags.txt');
     foreach($tagsFile as $tag) {
+		$tag = trim($tag);
         $query = "INSERT INTO tags (tag_name) VALUES (?)";
         $stmt = $conn->prepare($query);
-        $stmt->execute([$tag]);
+		$stmt->execute([$tag]);
 }
 echo "Tags added </br>";
 } catch (PDOException $e) {
