@@ -22,7 +22,7 @@
 			$create = $conn->prepare($sql);
 			$create->execute();
 			
-			include_once 'config/setup.con.php';
+			include_once 'setup/setup.con.php';
 			$conn->query("use `$DB_NAME`");
 			cr_users($conn);
 			cr_likes($conn);
