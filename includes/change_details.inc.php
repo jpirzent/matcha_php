@@ -8,7 +8,7 @@
 		//uid
 		if ($_POST['submit'] == "uid")
 		{
-			$n_uid = $_POST['newuid'];
+			$n_uid = htmlentities($_POST['newuid']);
 			$o_uid = $_SESSION['u_uid'];
 			$pwd = $_POST['pwd'];
 
@@ -155,7 +155,7 @@
 		{
 			$id = $_SESSION['u_id'];
 			$pwd = $_POST['pwd'];
-			$email = $_POST['newemail'];
+			$email = htmlentities($_POST['newemail']);
 
 			if (empty($pwd) || empty($email))
 			{
@@ -377,26 +377,104 @@
 		else if ($_POST['submit'] == "pic")
 		{
 			$id = $_SESSION['u_id'];
-			if (isset($_FILES['profile']))
+			$target_path = "../imgs/";
+			if (isset($_FILES['profile']['name']))
 			{
-				$profile = base64_encode(file_get_contents($_FILES['profile']['tmp_name']));
+				$path_info = pathinfo($_FILES['profile']['name']);
+				$ext = $path_info['extension'];
+	
+				$newname = "profile-".$_SESSION['u_id'].".".$ext;
+				$target = $target_path.$newname;
+
+				if (file_exists($target))
+				{
+					unlink($target);
+					echo 'file Deleted';
+				}
+
+				move_uploaded_file($_FILES['profile']['tmp_name'], $target);
+	
+				$profile = $target;
 			}
-			if (isset($_FILES['ot-pic1']))
+	
+			if (isset($_FILES['ot-pic1']['name']))
 			{
-				$other1 = base64_encode(file_get_contents($_FILES['ot-pic1']['tmp_name']));
+				$path_info = pathinfo($_FILES['ot-pic1']['name']);
+				$ext = $path_info['extension'];
+	
+				$newname = "ot-pic1-".$_SESSION['u_id'].".".$ext;
+				$target = $target_path.$newname;
+
+				if (file_exists($target))
+				{
+					unlink($target);
+					echo 'file Deleted';
+				}
+
+				move_uploaded_file($_FILES['ot-pic1']['tmp_name'], $target);
+	
+				$other1 = $target;
 			}
-			if (isset($_FILES['ot-pic1']))
+	
+			if (isset($_FILES['ot-pic2']['name']))
 			{
-				$other2 = base64_encode(file_get_contents($_FILES['ot-pic2']['tmp_name']));
+				$path_info = pathinfo($_FILES['ot-pic2']['name']);
+				$ext = $path_info['extension'];
+	
+				$newname = "ot-pic2-".$_SESSION['u_id'].".".$ext;
+				$target = $target_path.$newname;
+
+				if (file_exists($target))
+				{
+					unlink($target);
+					echo 'file Deleted';
+				}
+
+				move_uploaded_file($_FILES['ot-pic2']['tmp_name'], $target);
+	
+				$other2 = $target;
 			}
-			if (isset($_FILES['ot-pic1']))
+	
+			if (isset($_FILES['ot-pic3']['name']))
 			{
-				$other3 = base64_encode(file_get_contents($_FILES['ot-pic3']['tmp_name']));
+				$path_info = pathinfo($_FILES['ot-pic3']['name']);
+				$ext = $path_info['extension'];
+	
+				$newname = "ot-pic3-".$_SESSION['u_id'].".".$ext;
+				$target = $target_path.$newname;
+
+				if (file_exists($target))
+				{
+					unlink($target);
+					echo 'file Deleted';
+				}
+
+				move_uploaded_file($_FILES['ot-pic3']['tmp_name'], $target);
+	
+				$other3 = $target;
 			}
-			if (isset($_FILES['ot-pic1']))
+	
+			if (isset($_FILES['ot-pic4']['name']))
 			{
-				$other4 = base64_encode(file_get_contents($_FILES['ot-pic4']['tmp_name']));
+				$path_info = pathinfo($_FILES['ot-pic4']['name']);
+				$ext = $path_info['extension'];
+	
+				$newname = "ot-pic4-".$_SESSION['u_id'].".".$ext;
+				$target = $target_path.$newname;
+				print($ext);
+
+				if (file_exists($target))
+				{
+					unlink($target);
+					echo '<br>file Deleted';
+				}
+
+				move_uploaded_file($_FILES['ot-pic4']['tmp_name'], $target);
+	
+				$other4 = $target;
 			}
+
+
 			try
 			{
 				$sql = "UPDATE preferences 
@@ -404,7 +482,6 @@
 						WHERE pref_uid=:id LIMIT 1";
 				$pdo = $conn->prepare($sql);
 				$pdo->bindParam(':profiles', $profile);
-				echo 'what?<br>';
 				$pdo->bindParam(':other1', $other1);
 				$pdo->bindParam(':other2', $other2);
 				$pdo->bindParam(':other3', $other3);

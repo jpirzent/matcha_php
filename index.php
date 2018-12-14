@@ -100,6 +100,7 @@
 		{
 			$uid = $value['user_uid'];
 			$id = $value['user_id'];
+			
 			$valid = checkUser($value, $conn);
 			if ($valid == TRUE)
 			{
@@ -118,11 +119,14 @@
 						echo $var->getMessage();
 					}
 
-					$profile = $check['pref_profile'];
+					$profile = str_replace("..", '', $check['pref_profile']);
+					$profile = str_replace(".jpeg", '.jpg', $profile);
+					$profile = '.'.$profile;
+					
 					$bio = $check['pref_bio'];
 					echo '<div class="col-sm mt-3">
 							<div class="card bg-dark" style="width: 18rem;">
-								<img class="card-img-top" src="data:image/png;base64,'.($profile).'" alt="Profile Picture" style="height: 200px">
+								<img class="card-img-top" src="'.($profile).'" alt="Profile Picture" style="height: 200px">
 								<div class="card-body">
 									<h5 class="card-title text-danger">'.$uid.'</h5>
 									<p class="card-text text-danger">'.$bio.'</p>

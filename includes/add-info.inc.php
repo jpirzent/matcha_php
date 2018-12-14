@@ -8,23 +8,68 @@
 		$sex = $_POST['sexuality'];
 		$bio = htmlentities($_POST['bio']);
 
-		$profile = base64_encode(file_get_contents($_FILES['profile']['tmp_name']));
-		if (isset($_FILES['ot-pic1']))
+		$target_path = "../imgs/";
+
+		if (isset($_FILES['profile']['name']) && $_FILES['profile']['name'] != NULL)
 		{
-			$other1 = base64_encode(file_get_contents($_FILES['ot-pic1']['tmp_name']));
+			$path_info = pathinfo($_FILES['profile']['name']);
+			$ext = $path_info['extension'];
+
+			$newname = "profile-".$_SESSION['u_id'].".".$ext;
+			$target = $target_path.$newname;
+			move_uploaded_file($_FILES['profile']['tmp_name'], $target);
+
+			$profile = $target;
 		}
-		if (isset($_FILES['ot-pic1']))
+
+		if (isset($_FILES['ot-pic1']['name']) && $_FILES['ot-pic1']['name'] != NULL)
 		{
-			$other2 = base64_encode(file_get_contents($_FILES['ot-pic2']['tmp_name']));
+			$path_info = pathinfo($_FILES['ot-pic1']['name']);
+			$ext = $path_info['extension'];
+
+			$newname = "ot-pic1-".$_SESSION['u_id'].".".$ext;
+			$target = $target_path.$newname;
+			move_uploaded_file($_FILES['ot-pic1']['tmp_name'], $target);
+
+			$other1 = $target;
 		}
-		if (isset($_FILES['ot-pic1']))
+
+		if (isset($_FILES['ot-pic2']['name']) && $_FILES['ot-pic2']['name'] != NULL)
 		{
-			$other3 = base64_encode(file_get_contents($_FILES['ot-pic3']['tmp_name']));
+			$path_info = pathinfo($_FILES['ot-pic2']['name']);
+			$ext = $path_info['extension'];
+
+			$newname = "ot-pic2-".$_SESSION['u_id'].".".$ext;
+			$target = $target_path.$newname;
+			move_uploaded_file($_FILES['ot-pic2']['tmp_name'], $target);
+
+			$other2 = $target;
 		}
-		if (isset($_FILES['ot-pic1']))
+
+		if (isset($_FILES['ot-pic3']['name'])&& $_FILES['ot-pic3']['name'] != NULL)
 		{
-			$other4 = base64_encode(file_get_contents($_FILES['ot-pic4']['tmp_name']));
+			$path_info = pathinfo($_FILES['ot-pic3']['name']);
+			$ext = $path_info['extension'];
+
+			$newname = "ot-pic3-".$_SESSION['u_id'].".".$ext;
+			$target = $target_path.$newname;
+			move_uploaded_file($_FILES['ot-pic3']['tmp_name'], $target);
+
+			$other3 = $target;
 		}
+
+		if (isset($_FILES['ot-pic4']['name']) && $_FILES['ot-pic4']['name'] != NULL)
+		{
+			$path_info = pathinfo($_FILES['ot-pic4']['name']);
+			$ext = $path_info['extension'];
+
+			$newname = "ot-pic4-".$_SESSION['u_id'].".".$ext;
+			$target = $target_path.$newname;
+			move_uploaded_file($_FILES['ot-pic4']['tmp_name'], $target);
+
+			$other4 = $target;
+		}
+
 		if (empty($gender) || empty($sex) || empty($bio))
 		{
 			header("Location: ../index.php?error=PleaseLogin");

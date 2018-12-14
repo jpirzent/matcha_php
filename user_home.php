@@ -43,7 +43,12 @@ try
 			$sex = $res['pref_sex'];
 			$gender = $res['pref_gender'];
 			$f_rate = $res['pref_fameRate'];
+
 			$profile = $res['pref_profile'];
+			$profile = str_replace("..", '', $profile);
+			$profile = str_replace(".jpeg", '.jpg', $profile);
+			$profile = '.'.$profile;
+			
 			$my_tags = explode(',', $res['pref_tags']);
 
 			echo '<div class="jumbotron text-danger bg-dark" style="margin-top: 2%">
@@ -58,9 +63,55 @@ try
 					<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img class="d-block w-25 mx-auto" src="data:image/png;base64,'.$profile.'" alt="First slide">
-							</div>
-						</div>
+								<img class="d-block w-25 mx-auto" src="'.$profile.'" alt="First slide">
+							</div>';
+
+							if (!(empty($res['pref_ot-pic1'])))
+							{
+								$other1 = $res['pref_ot-pic1'];
+								$other1 = str_replace("..", '', $other1);
+								$other1 = str_replace(".jpeg", '.jpg', $other1);
+								$other1 = '.'.$other1;
+			
+								echo '<div class="carousel-item">
+										<img class="d-block w-25 mx-auto" src="'.$other1.'" alt="Second slide">
+									</div>';
+							}
+							if (!(empty($res['pref_ot-pic2'])))
+							{
+								$other2 = $res['pref_ot-pic2'];
+								$other2 = str_replace("..", '', $other2);
+								$other2 = str_replace(".jpeg", '.jpg', $other2);
+								$other2 = '.'.$other2;
+			
+								echo '<div class="carousel-item">
+										<img class="d-block w-25 mx-auto" src="'.$other2.'" alt="Third slide">
+									</div>';
+							}
+							if (!(empty($res['pref_ot-pic3'])))
+							{
+								$other3 = $res['pref_ot-pic3'];
+								$other3 = str_replace("..", '', $other3);
+								$other3 = str_replace(".jpeg", '.jpg', $other3);
+								$other3 = '.'.$other3;
+			
+								echo '<div class="carousel-item">
+										<img class="d-block w-25 mx-auto" src="'.$other3.'" alt="Fourth slide">
+									</div>';
+							}
+							if (!(empty($res['pref_ot-pic4'])))
+							{
+								$other4 = $res['pref_ot-pic4'];
+								$other4 = str_replace("..", '', $other4);
+								$other4 = str_replace(".jpeg", '.jpg', $other4);
+								$other4 = '.'.$other4;
+			
+								echo '<div class="carousel-item">
+										<img class="d-block w-25 mx-auto" src="'.$other4.'" alt="Fifth slide">
+									</div>';
+							}
+				
+					echo '</div>
 					</div>
 					<h3 style="text-align: center; margin-top: 2%">/Name/ '.$name.'</h3>
 					<h3 style="text-align: center; margin-top: 2%">/Gender/ '.$gender.'</h3>

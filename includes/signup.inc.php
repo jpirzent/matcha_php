@@ -2,12 +2,12 @@
 	if (isset($_POST['submit'])) 
 	{
 		include_once 'dbh.inc.php';
-		$first = $_POST['first'];
-		$last = $_POST['last'];
-		$email = $_POST['email'];
-		$uid = $_POST['uid'];
-		$pwd = $_POST['pwd'];
-		$age = $_POST['age'];
+		$first = htmlentities($_POST['first']);
+		$last = htmlentities($_POST['last']);
+		$email = htmlentities($_POST['email']);
+		$uid = htmlentities($_POST['uid']);
+		$pwd = htmlentities($_POST['pwd']);
+		$age = htmlentities($_POST['age']);
 		if (empty($first) || empty($last) || empty($email) || empty($uid) || empty($pwd || empty($age)))
 		{
 			header("Location: ../signup.php?signup=empty");
